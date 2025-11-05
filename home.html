@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEMXCloud - Free VPS Hosting</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.0.0/flowbite.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            color: #e2e8f0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            min-height: 100vh;
+        }
+        
+        .navbar {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.75rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #3b82f6;
+        }
+        
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            color: #cbd5e1;
+            margin-bottom: 3rem;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+        
+        .btn-secondary {
+            background: rgba(148, 163, 184, 0.1);
+            color: #3b82f6;
+            border: 1px solid #3b82f6;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .features {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .feature-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1);
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: #3b82f6;
+        }
+        
+        .feature-card p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        .info-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: rgba(30, 41, 59, 0.6);
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        
+        .info-section h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: #3b82f6;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .info-item {
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 0.5rem;
+            border-left: 4px solid #8b5cf6;
+        }
+        
+        .info-item h3 {
+            color: #3b82f6;
+            margin-bottom: 0.75rem;
+        }
+        
+        .info-item p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+        
+        .footer {
+            max-width: 1200px;
+            margin: 3rem auto 0;
+            padding: 2rem;
+            text-align: center;
+            color: #64748b;
+            border-top: 1px solid rgba(148, 163, 184, 0.1);
+        }
+        
+        .beta-badge {
+            display: inline-block;
+            background: #ef4444;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">🚀 WEMXCloud</div>
+            <ul class="nav-links">
+                <li><a href="#features">Features</a></li>
+                <li><a href="#info">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="beta-badge">🔧 BETA TESTING - FREE</div>
+        <h1>Hello and Welcome to WEMXCloud</h1>
+        <p class="hero-subtitle">Free WEMX VPS Hosting for 6 Months</p>
+        
+        <p style="font-size: 1.1rem; color: #cbd5e1; margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+            You may ask, what is WEMXCloud? WEMX Cloud is a new platform offering free WEMX VPS hosting for up to 6 months. Get a chance to make some profit and then move on to get your own VPS setup. This is the perfect opportunity to really try hosting!
+        </p>
+        
+        <div class="cta-buttons">
+            <button class="btn btn-primary">Get Started Now</button>
+            <button class="btn btn-secondary">Learn More</button>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="feature-card">
+            <div class="feature-icon">🆓</div>
+            <h3>Completely Free</h3>
+            <p>Enjoy 6 months of free WEMX VPS hosting. No credit card required to get started with your hosting journey.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">⏱️</div>
+            <h3>6 Month Trial</h3>
+            <p>Test your hosting setup with a full 6 months of free service. Plenty of time to evaluate and grow your infrastructure.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">💰</div>
+            <h3>Profit Opportunity</h3>
+            <p>Use the free period to generate revenue and profit before upgrading to your own dedicated VPS setup.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🚀</div>
+            <h3>Easy Migration</h3>
+            <p>When ready, seamlessly migrate to your own VPS setup with guidance and support from our team.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">🔧</div>
+            <h3>Full Control</h3>
+            <p>Get complete access to your WEMX installation with all the tools you need to customize and optimize.</p>
+        </div>
+        
+        <div class="feature-card">
+            <div class="feature-icon">👥</div>
+            <h3>Community Support</h3>
+            <p>Join a growing community of WEMX users and get support during your hosting experience.</p>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section class="info-section" id="info">
+        <h2>Important Information</h2>
+        
+        <div class="info-grid">
+            <div class="info-item">
+                <h3>⚠️ Beta Status</h3>
+                <p>This service is currently in beta and is free. Without a doubt, there will be bugs and errors as we refine the platform. Your feedback helps us improve.</p>
+            </div>
+            
+            <div class="info-item">
+                <h3>🏢 Independent Operation</h3>
+                <p>This is NOT officially run by WEMX.net. It's run by a WEMX staff member, making it a community-driven initiative to help users like you.</p>
+            </div>
+            
+            <div class="info-item">
+                <h3>📋 Future Plans</h3>
+                <p>While we may offer longer plans in the future, at this time we have no plans to do so. 6 months gives you plenty of time to establish yourself.</p>
+            </div>
+            
+            <div class="info-item">
+                <h3>💡 Testing Opportunity</h3>
+                <p>This gives you a real chance to try hosting without any financial commitment. Perfect for testing your WEMX installation before going live.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <p>&copy; 2025 WEMXCloud. This is a beta service run by a WEMX staff member. Not officially affiliated with WEMX.net</p>
+        <p style="margin-top: 1rem; font-size: 0.9rem;">Ready to get started? <span style="color: #3b82f6; font-weight: 600;">Join WEMXCloud today!</span></p>
+    </footer>
+</body>
+</html>
