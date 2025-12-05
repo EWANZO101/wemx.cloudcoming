@@ -18,6 +18,124 @@
             color: #e2e8f0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        /* Loading Screen Styles */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        #loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loading-content {
+            max-width: 600px;
+            width: 90%;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .loading-logo {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        .loading-title {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+        }
+        
+        .loading-message {
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid rgba(59, 130, 246, 0.3);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+        
+        .loading-message h3 {
+            color: #3b82f6;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .loading-message p {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+        }
+        
+        .loading-message .highlight {
+            color: #ef4444;
+            font-weight: bold;
+        }
+        
+        .progress-container {
+            width: 100%;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 9999px;
+            height: 30px;
+            overflow: hidden;
+            border: 2px solid rgba(148, 163, 184, 0.2);
+            margin-bottom: 1rem;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            border-radius: 9999px;
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+        
+        .progress-text {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        
+        /* Main Content Styles */
+        #main-content {
+            display: none;
+        }
+        
+        #main-content.visible {
+            display: block;
         }
         
         .navbar {
@@ -227,6 +345,22 @@
         }
         
         @media (max-width: 768px) {
+            .loading-title {
+                font-size: 1.5rem;
+            }
+            
+            .loading-message {
+                padding: 1.5rem;
+            }
+            
+            .loading-message h3 {
+                font-size: 1.2rem;
+            }
+            
+            .loading-message p {
+                font-size: 1rem;
+            }
+            
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -248,111 +382,183 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">🚀 WEMXCloud</div>
-            <ul class="nav-links">
-                <li><a href="#features">Features</a></li>
-                <li><a href="#info">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">🚀</div>
+            <h2 class="loading-title">WEMXCloud</h2>
+            
+            <div class="loading-message">
+                <h3>⚠️ Quick Note</h3>
+                <p>
+                    Before you look at our website, please note: Due to this being a <span class="highlight">free service</span>, 
+                    it can take up to <span class="highlight">24 hours</span> to receive your WEMX VPS after ordering.
+                </p>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar">0%</div>
+            </div>
+            <p class="progress-text" id="progress-text">Loading website...</p>
         </div>
-    </nav>
-
-    <!-- Hero Section -->
-   <!-- Hero Section -->
-<section class="hero">
-    <div class="beta-badge">🔧 BETA TESTING - FREE</div>
-    <h1>Hello and Welcome to WEMXCloud</h1>
-    <p class="hero-subtitle">Free WEMX VPS Hosting for 6 Months</p>
-    
-    <p style="font-size: 1.1rem; color: #cbd5e1; margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
-        What is WEMXCloud? WEMXCloud is a new platform that lets you easily host your <strong>WEMX store</strong> — completely free for up to <strong>6 months</strong>.<br><br>
-        Here’s how it works:<br>
-        1️⃣ Go to <a href="https://wemx.net" target="_blank" style="color: #38bdf8;">wemx.net</a> and get your WEMX license.<br>
-        2️⃣ Come back here and order your <strong>free VPS</strong> for your WEMX store.<br>
-        3️⃣ Start hosting instantly — no setup or technical work needed!<br><br>
-        This is the perfect opportunity to <strong>try hosting</strong>, <strong>grow your store</strong>, and even <strong>make some profit</strong> before moving on to your own VPS setup.
-    </p>
-    
-    <div class="cta-buttons">
-        <button class="btn btn-primary">Get Started Now</button>
-        <button class="btn btn-secondary">Learn More</button>
     </div>
-</section>
 
+    <!-- Main Content -->
+    <div id="main-content">
+        <!-- Navigation -->
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">🚀 WEMXCloud</div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#info">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="feature-card">
-            <div class="feature-icon">🆓</div>
-            <h3>Completely Free</h3>
-            <p>Enjoy 6 months of free WEMX VPS hosting. No credit card required to get started with your hosting journey.</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">⏱️</div>
-            <h3>6 Month Trial</h3>
-            <p>Test your hosting setup with a full 6 months of free service. Plenty of time to evaluate and grow your infrastructure.</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">💰</div>
-            <h3>Profit Opportunity</h3>
-            <p>Use the free period to generate revenue and profit before upgrading to your own dedicated VPS setup.</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">🚀</div>
-            <h3>Easy Migration</h3>
-            <p>When ready, seamlessly migrate to your own VPS setup with guidance and support from our team.</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">🔧</div>
-            <h3>Full Control</h3>
-            <p>Get complete access to your WEMX installation with all the tools you need to customize and optimize.</p>
-        </div>
-        
-        <div class="feature-card">
-            <div class="feature-icon">👥</div>
-            <h3>Community Support</h3>
-            <p>Join a growing community of WEMX users and get support during your hosting experience.</p>
-        </div>
-    </section>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="beta-badge">🔧 BETA TESTING - FREE</div>
+            <h1>Hello and Welcome to WEMXCloud</h1>
+            <p class="hero-subtitle">Free WEMX VPS Hosting for 6 Months</p>
+            
+            <p style="font-size: 1.1rem; color: #cbd5e1; margin-bottom: 3rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+                What is WEMXCloud? WEMXCloud is a new platform that lets you easily host your <strong>WEMX store</strong> — completely free for up to <strong>6 months</strong>.<br><br>
+                Here's how it works:<br>
+                1️⃣ Go to <a href="https://wemx.net" target="_blank" style="color: #38bdf8;">wemx.net</a> and get your WEMX license.<br>
+                2️⃣ Come back here and order your <strong>free VPS</strong> for your WEMX store.<br>
+                3️⃣ Start hosting instantly — no setup or technical work needed!<br><br>
+                This is the perfect opportunity to <strong>try hosting</strong>, <strong>grow your store</strong>, and even <strong>make some profit</strong> before moving on to your own VPS setup.
+            </p>
+            
+            <div class="cta-buttons">
+                <button class="btn btn-primary">Get Started Now</button>
+                <button class="btn btn-secondary">Learn More</button>
+            </div>
+        </section>
 
-    <!-- Info Section -->
-    <section class="info-section" id="info">
-        <h2>Important Information</h2>
-        
-        <div class="info-grid">
-            <div class="info-item">
-                <h3>⚠️ Beta Status</h3>
-                <p>This service is currently in beta and is free. Without a doubt, there will be bugs and errors as we refine the platform. Your feedback helps us improve.</p>
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="feature-card">
+                <div class="feature-icon">🆓</div>
+                <h3>Completely Free</h3>
+                <p>Enjoy 6 months of free WEMX VPS hosting. No credit card required to get started with your hosting journey.</p>
             </div>
             
-            <div class="info-item">
-                <h3>🏢 Independent Operation</h3>
-                <p>This is NOT officially run by WEMX.net. It's run by a WEMX staff member, making it a community-driven initiative to help users like you.</p>
+            <div class="feature-card">
+                <div class="feature-icon">⏱️</div>
+                <h3>6 Month Trial</h3>
+                <p>Test your hosting setup with a full 6 months of free service. Plenty of time to evaluate and grow your infrastructure.</p>
             </div>
             
-            <div class="info-item">
-                <h3>📋 Future Plans</h3>
-                <p>While we may offer longer plans in the future, at this time we have no plans to do so. 6 months gives you plenty of time to establish yourself.</p>
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <h3>Profit Opportunity</h3>
+                <p>Use the free period to generate revenue and profit before upgrading to your own dedicated VPS setup.</p>
             </div>
             
-            <div class="info-item">
-                <h3>💡 Testing Opportunity</h3>
-                <p>This gives you a real chance to try hosting without any financial commitment. Perfect for testing your WEMX installation before going live.</p>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Easy Migration</h3>
+                <p>When ready, seamlessly migrate to your own VPS setup with guidance and support from our team.</p>
             </div>
-        </div>
-    </section>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔧</div>
+                <h3>Full Control</h3>
+                <p>Get complete access to your WEMX installation with all the tools you need to customize and optimize.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">👥</div>
+                <h3>Community Support</h3>
+                <p>Join a growing community of WEMX users and get support during your hosting experience.</p>
+            </div>
+        </section>
 
-    <!-- Footer -->
-    <footer class="footer" id="contact">
-        <p>&copy; 2025 WEMXCloud. </p>
-        <p style="margin-top: 1rem; font-size: 0.9rem;">Ready to get started? <span style="color: #3b82f6; font-weight: 600;">Join WEMXCloud today!</span></p>
-    </footer>
+        <!-- Info Section -->
+        <section class="info-section" id="info">
+            <h2>Important Information</h2>
+            
+            <div class="info-grid">
+                <div class="info-item">
+                    <h3>⚠️ Beta Status</h3>
+                    <p>This service is currently in beta and is free. Without a doubt, there will be bugs and errors as we refine the platform. Your feedback helps us improve.</p>
+                </div>
+                
+                <div class="info-item">
+                    <h3>🏢 Independent Operation</h3>
+                    <p>This is NOT officially run by WEMX.net. It's run by a WEMX staff member, making it a community-driven initiative to help users like you.</p>
+                </div>
+                
+                <div class="info-item">
+                    <h3>📋 Future Plans</h3>
+                    <p>While we may offer longer plans in the future, at this time we have no plans to do so. 6 months gives you plenty of time to establish yourself.</p>
+                </div>
+                
+                <div class="info-item">
+                    <h3>💡 Testing Opportunity</h3>
+                    <p>This gives you a real chance to try hosting without any financial commitment. Perfect for testing your WEMX installation before going live.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer" id="contact">
+            <p>&copy; 2025 WEMXCloud. </p>
+            <p style="margin-top: 1rem; font-size: 0.9rem;">Ready to get started? <span style="color: #3b82f6; font-weight: 600;">Join WEMXCloud today!</span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Progress bar animation
+        let progress = 0;
+        const progressBar = document.getElementById('progress-bar');
+        const progressText = document.getElementById('progress-text');
+        const loadingScreen = document.getElementById('loading-screen');
+        const mainContent = document.getElementById('main-content');
+        
+        const messages = [
+            "Loading website...",
+            "Preparing information...",
+            "Getting everything ready...",
+            "Almost there..."
+        ];
+        
+        let messageIndex = 0;
+        
+        const interval = setInterval(() => {
+            progress += 2;
+            
+            if (progress <= 100) {
+                progressBar.style.width = progress + '%';
+                progressBar.textContent = progress + '%';
+                
+                // Update message at certain intervals
+                if (progress === 25 || progress === 50 || progress === 75) {
+                    messageIndex++;
+                    if (messageIndex < messages.length) {
+                        progressText.textContent = messages[messageIndex];
+                    }
+                }
+            }
+            
+            if (progress >= 100) {
+                clearInterval(interval);
+                progressText.textContent = "Complete!";
+                
+                // Fade out loading screen and show main content
+                setTimeout(() => {
+                    loadingScreen.classList.add('fade-out');
+                    setTimeout(() => {
+                        loadingScreen.style.display = 'none';
+                        mainContent.classList.add('visible');
+                        document.body.style.overflow = 'auto';
+                    }, 500);
+                }, 500);
+            }
+        }, 50); // Adjust speed here (50ms = ~5 seconds total)
+    </script>
 </body>
 </html>
